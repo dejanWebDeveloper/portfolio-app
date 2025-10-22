@@ -23,11 +23,12 @@
                     <h3 class="h4">{{$blogProject->heading}}</h3></a>
                 <p class="text-muted">{{$blogProject->preheading}}</p>
                 <footer class="post-footer d-flex align-items-center"><p class="author d-flex align-items-center flex-wrap">
-                        <div class="avatar">
+                        <div class="avatar"><img src="{{url('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396')}}" alt="..." class="img-fluid">
                         </div>
                         <div class="title"><span>{{$blogProject->author}}</span></div>
                     </p>
                     <div class="date"><i class="icon-clock"></i>{{$blogProject->created_at->diffForHumans()}}</div>
+                    <div class="views"><i class="icon-eye"></i>{{$blogProject->views}}</div>
                 </footer>
             </div>
         </div>

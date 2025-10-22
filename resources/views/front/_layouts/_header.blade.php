@@ -38,3 +38,13 @@
         </div>
     </nav>
 </header>
+<header class="fixed top-0 left-0 w-full bg-gray-950/80 backdrop-blur-md border-b border-gray-800 z-50">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold text-indigo-500">Tvoje Ime</a>
+        <ul class="flex gap-6 text-gray-300">
+            <li><a href="projekti.html" class="hover:text-indigo-400 transition">Projekti</a></li>
+            <li><a href="linkovi.html" class="hover:text-indigo-400 transition">Linkovi</a></li>
+            <li><a href="kontakt.html" class="hover:text-indigo-400 transition">Kontakt</a></li>
+        </ul>
+    </nav>
+</header>

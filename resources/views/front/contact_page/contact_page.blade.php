@@ -14,8 +14,6 @@
             <aside class="col-lg-4">
                 <!-- Widget [Contact Widget]-->
                 @include('front.contact_page.partials.contact_info')
-                <!-- Widget [Latest Posts Widget]        -->
-                @include('front.blog_pages.partials.latest_projects')
             </aside>
         </div>
     </div>

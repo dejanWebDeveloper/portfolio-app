@@ -1,5 +1,5 @@
 <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
-        @if($prevPost)
+        @if($prevProject)
             <a href="{{route('blog_project_page', ['id'=>$prevProject->id, 'slug'=>$prevProject->slug])}}"
                class="prev-post text-left d-flex align-items-center">
                 <div class="icon prev">

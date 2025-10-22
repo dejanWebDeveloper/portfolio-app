@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('github_link')->nullable();
             $table->string('demo_link')->nullable();
             $table->integer('category_id');
-            $table->integer('author');
+            $table->string('author');
             $table->unsignedBigInteger('views')->default(0);
             $table->boolean('enable')->default(1);
             $table->integer('priority');

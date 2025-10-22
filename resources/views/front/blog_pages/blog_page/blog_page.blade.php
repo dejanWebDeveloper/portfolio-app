@@ -14,8 +14,6 @@
             <aside class="col-lg-4">
                 <!-- Widget [Search Bar Widget]-->
                 @include('front.blog_pages.partials.search_projects')
-                <!-- Widget [Latest Posts Widget]        -->
-                @include('front.blog_pages.partials.latest_projects')
                 <!-- Widget [Categories Widget]-->
                 @include('front.blog_pages.partials.categories')
             </aside>

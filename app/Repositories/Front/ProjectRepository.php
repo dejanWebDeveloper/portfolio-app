@@ -57,9 +57,7 @@ class ProjectRepository
     {
         $cacheKey = "singleProject_{$id}";
         $singleProject = Cache::remember($cacheKey, 300, function () use ($id, $slug) {
-            return Project::withCount(['comments' => function ($query) {
-                $query->where('enable', 1);
-            }])->where('slug', $slug)
+            return Project::where('slug', $slug)
                 ->where('id', $id)
                 ->where('enable', 1)
                 ->firstOrFail();

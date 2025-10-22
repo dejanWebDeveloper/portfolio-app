@@ -28,7 +28,7 @@ class ProjectRepository
 
     public function dataTable(Request $request)
     {
-        $query = Project::with(['category', 'author']);
+        $query = Project::with(['category']);
 
         if ($request->heading) {
             $query->where('heading', 'like', "%{$request->heading}%");

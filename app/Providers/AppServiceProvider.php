@@ -40,14 +40,6 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
             view()->share(compact('latestFooterProjects'));
         }
-        if (Schema::hasTable('projects')) {
-            $latestProjectsForBlogPartial = Project::standardRequest()
-                ->whereBetween('created_at', [Carbon::now()->subMonth(), Carbon::now()])
-                ->orderByDesc('views')
-                ->take(3)
-                ->get();
-            view()->share(compact('latestProjectsForBlogPartial'));
-        }
         if (Schema::hasTable('categories')) {
             $allCategoriesForBlogPartial = Category::withCount(['projects' => function ($query) {
                 $query->orderBy('created_at', 'desc')
@@ -55,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             }])->get();
             view()->share(compact('allCategoriesForBlogPartial'));
         }
-        if (Schema::hasTable('tags')) {
+        /*if (Schema::hasTable('tags')) {
             $allTagsForBlogPartial = Tag::withCount(['projects as enabled_projects_count' => function ($query) {
                 $query->where('enable', true);
             }])
@@ -63,6 +55,6 @@ class AppServiceProvider extends ServiceProvider
                 ->get();
 
             view()->share(compact('allTagsForBlogPartial'));
-        }
+        }*/
     }
 }

@@ -40,30 +40,6 @@
                                     {{session()->pull('system_message')}}
                                 </div>
                             @endif
-                            <form id="entities-filter-form">
-                                <div class="row">
-                                    <div class="col-md-1 form-group">
-                                        <label>Status</label>
-                                        <select id="select-status" name="status" class="form-control">
-                                            <option></option>
-                                            <option value="1">Enabled</option>
-                                            <option value="0">Disabled</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3 form-group">
-                                        <label>Email</label>
-                                        <input name="email" type="text" class="form-control" placeholder="Search by email">
-                                    </div>
-                                    <div class="col-md-3 form-group">
-                                        <label>Name</label>
-                                        <input name="name" type="text" class="form-control" placeholder="Search by name">
-                                    </div>
-                                    <div class="col-md-3 form-group">
-                                        <label>Phone</label>
-                                        <input name="phone" type="text" class="form-control" placeholder="Search by phone">
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
@@ -198,10 +174,6 @@
                     type: "post",
                     data: function (d) {
                         d._token = "{{ csrf_token() }}";
-                        d.name = $('input[name=name]').val();
-                        d.email = $('input[name=email]').val();
-                        d.phone = $('input[name=phone]').val();
-                        d.status = $('select[name=status]').val();
                     }
                 },
                 order: [[6, "asc"]],
@@ -219,14 +191,6 @@
                 lengthMenu: [5, 10, 20]
             });
 
-            // reload table when filter was changed
-            $('#entities-filter-form input, #entities-filter-form select').on('change keyup', function () {
-                $('#users-table').DataTable().ajax.reload();
-            });
-            //$('#select-status').change(function () {
-              //  table.draw();
-            //});
-            //disable user
             // Open modal and enter data
             $('#users-table').on('click', "[data-action='disable']", function () {
                 let id = $(this).attr('data-id');

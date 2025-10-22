@@ -19,7 +19,7 @@ Route::prefix('/blog')->name('blog_')->group(function () {
     Route::get('/', [\App\Http\Controllers\Front\BlogController::class, 'blog'])->name('page');
     //Route::get('/author/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogAuthor'])->name('author_page');
     Route::get('/category/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogCategory'])->name('category_page');
-    Route::get('/post/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogProject'])->name('post_page');
+    Route::get('/post/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogProject'])->name('project_page');
     //Route::post('/store-comment', [\App\Http\Controllers\Front\BlogController::class, 'storeComment'])->name('store_comment');
     Route::get('/search', [\App\Http\Controllers\Front\BlogController::class, 'blogSearch'])->name('search_page');
     Route::get('/tag/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogTag'])->name('tag_page');

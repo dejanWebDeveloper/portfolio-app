@@ -15,7 +15,7 @@
 </h1>
 <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
     <p>
-        <div class="avatar"></div>
+        <div class="avatar"><img src="{{url('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396')}}" alt="..." class="img-fluid"></div>
         <div class="title">
             <span>{{$singleProject->author}}</span>
         </div>

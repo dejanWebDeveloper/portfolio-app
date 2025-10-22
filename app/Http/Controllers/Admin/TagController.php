@@ -37,7 +37,7 @@ class TagController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'name' => ['required', 'string', 'between:5,30', 'unique:tags,name']
+            'name' => ['required', 'string', 'between:3,30', 'unique:tags,name']
         ]);
         $this->tags->saveTag($data);
 

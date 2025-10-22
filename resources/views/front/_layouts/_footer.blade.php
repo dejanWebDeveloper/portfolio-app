@@ -6,9 +6,8 @@
                     <h6 class="text-white">Bootstrap Blog</h6>
                 </div>
                 <div class="contact-details">
-                    <p>53 Broadway, Broklyn, NY 11249</p>
-                    <p>Phone: (020) 123 456 789</p>
-                    <p>Email: <a href="mailto:info@company.com">Info@Company.com</a></p>
+                    <p>Pancevo, Serbia</p>
+                    <p>Email: <a href="mailto:dejan_web@outlook.com">Dejan Jovanovic</a></p>
                     <ul class="social-menu">
                         <li class="list-inline-item"><a href="https://www.facebook.com/?locale=sr_RS"><i
                                     class="fa fa-facebook"></i></a></li>
@@ -60,7 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p>&copy; 2017. All rights reserved. Your great site.</p>
+                    <p>&copy; 2025. All rights reserved. Your great site.</p>
                 </div>
                 <div class="col-md-6 text-right">
                     <p>Template By <a href="https://bootstrapious.com/p/bootstrap-carousel" class="text-white">Bootstrapious</a>

@@ -258,10 +258,6 @@
                 deleteField.value = 1;
             }
             $(document).ready(function () {
-                $('#select-author').select2({
-                    placeholder: "Select Author",
-                    allowClear: true
-                });
                 $('#select-category').select2({
                     placeholder: "Select Category",
                     allowClear: true
