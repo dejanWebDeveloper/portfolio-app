@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="en">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -40,22 +40,22 @@
 
         <div class="flex flex-wrap justify-center md:justify-start gap-4">
             <a
-                href="projekti.html"
+                href="{{route('blog_page')}}"
                 class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-full text-white transition-all duration-300"
             >
                 Projects
             </a>
             <a
-                href="linkovi.html"
+                href="{{route('links_page')}}"
                 class="border border-indigo-500 hover:bg-indigo-500 hover:text-white px-6 py-3 rounded-full transition-all duration-300"
             >
-                Linkovi
+                Links
             </a>
             <a
-                href="kontakt.html"
+                href="{{route('contact_page')}}"
                 class="text-indigo-400 hover:text-indigo-300 underline px-4 py-3"
             >
-                Kontakt →
+                Contact →
             </a>
         </div>
     </div>
@@ -80,7 +80,7 @@
 </section>
 <!-- Footer -->
 <footer class="py-6 text-center text-gray-500 border-t border-gray-800">
-    © 2025 Tvoje Ime — Sva prava zadržana.
+    © 2025 Dejan Jovanovic — All rights reserved.
 </footer>
 </body>
 </html>

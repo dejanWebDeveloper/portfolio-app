@@ -22,4 +22,8 @@ class IndexController extends Controller
           'latestProjectsSlider'
         ));
     }
+    public function getLinksPage()
+    {
+        return view('front.links_page.links_page');
+    }
 }
