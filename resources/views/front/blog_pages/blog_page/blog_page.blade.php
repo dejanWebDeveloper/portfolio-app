@@ -33,6 +33,7 @@
 
     <div class="grid md:grid-cols-3 gap-8">
         <!-- Projekat 1 -->
+        @foreach($blogProjects as $blogProject)
         <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2 transition">
             <img src="https://via.placeholder.com/400x250" alt="Online shop" class="w-full" />
             <div class="p-6">
@@ -44,10 +45,11 @@
                 <div class="flex gap-4">
                     <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">GitHub →</a>
                     <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium">Demo</a>
+                    <a href="{{route('blog_project_page', ['id'=>$blogProject->id, 'slug'=>$blogProject->slug])}}" class="text-indigo-400 hover:text-indigo-300 font-medium">Details</a>
                 </div>
             </div>
         </div>
-
+        @endforeach
         <!-- Projekat 2 -->
         <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:-translate-y-2 transition">
             <img src="https://via.placeholder.com/400x250" alt="Laravel blog" class="w-full" />
