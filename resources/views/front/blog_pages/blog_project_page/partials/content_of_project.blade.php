@@ -1,32 +1,30 @@
-<div class="post-meta d-flex justify-content-between">
-    <div class="category">
-        @if($singleProject->category)
-            <a href="{{ route('blog_category_page', ['id' => $singleProject->category->id, 'slug' => $singleProject->category->slug]) }}">
-                {{ $singleProject->category->name }}
-            </a>
-        @else
-            <a>Uncategorized</a>
-        @endif
-    </div>
+<!-- Screenshotovi -->
+<div class="grid md:grid-cols-2 gap-6 mb-12">
+    <img src="{{$singleProject->imageUrl()}}" alt="Login Screen" class="rounded-xl shadow-lg">
+    <img src="{{$singleProject->additionalImageUrl()}}" alt="Dashboard" class="rounded-xl shadow-lg">
 </div>
-<h1>{{$singleProject->heading}}
-    <a href="#"><i class="fa fa-bookmark-o"></i>
-    </a>
-</h1>
-<div class="post-footer d-flex align-items-center flex-column flex-sm-row">
-    <p>
-        <div class="avatar"><img src="{{url('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396')}}" alt="..." class="img-fluid"></div>
-        <div class="title">
-            <span>{{$singleProject->author}}</span>
-        </div>
+<!-- Detaljan opis -->
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Functionality description</h2>
+    <p class="list-disc list-inside text-gray-400">
+        {!! $singleProject->text !!}
     </p>
-    <div class="d-flex align-items-center flex-wrap">
-        <div class="date"><i class="icon-clock"></i>{{$singleProject->created_at->diffForHumans()}}</div>
-        <div class="views"><i class="icon-eye"></i>{{$singleProject->views}}</div>
+</section>
+
+<!-- Tehnologije -->
+<section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-4">Tehnologies</h2>
+    <div class="flex flex-wrap gap-4">
+        @foreach($singleProjectTags as $tag)
+            <span class="bg-indigo-600 px-4 py-1 rounded-full text-white">#{{$tag->name}}</span>
+        @endforeach
     </div>
-</div>
-<div class="post-body">
-    <p class="lead"></p>
-    <p>{{$singleProject->preheading}}</p>
-    <p>{!! $singleProject->text !!}</p>
-</div>
+</section>
+
+<!-- Linkovi -->
+<section class="text-center mb-20">
+    <a href="{{$singleProject->github_link}}"
+       class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-full transition-all duration-300 mr-4">GitHub</a>
+    <a href="{{$singleProject->demo_link}}"
+       class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-full transition-all duration-300">Demo</a>
+</section>
