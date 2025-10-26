@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 @include('front._layouts._head_link')
-<body>
+<body class="bg-gray-950 text-gray-100 font-sans">
 @include('front._layouts._header')
-
+<main class="pt-32 px-6 max-w-6xl mx-auto">
 @yield('content')
-
+</main>
 @include('front._layouts._footer')
 @include('front._layouts._footer_script')
 </body>
 </html>
+
+
+
