@@ -5,9 +5,7 @@
 @if (!isset($nullHeader))
     @include('front._layouts._header')
 @endif
-<main class="pt-32 px-6 max-w-6xl mx-auto">
 @yield('content')
-</main>
 @if (!isset($minFooter))
     @include('front._layouts._footer')
 @endif

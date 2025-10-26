@@ -1,5 +1,4 @@
 @extends('front._layouts._layout')
-
 @section('seo-title', ''.$singleProject->heading.' | Dejan Jovanovic')
 @section('content')
     @include('front.blog_pages.blog_project_page.partials.title')

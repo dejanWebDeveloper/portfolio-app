@@ -1,0 +1,13 @@
+<main class="pb-32 pt-32 flex flex-col items-center px-6">
+    <img src="{{url('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396')}}" alt="Dejan Jovanovic" class="rounded-full w-32 h-32 mb-6 border-4 border-indigo-600 shadow-lg" />
+    <h1 class="text-3xl font-bold mb-2">Dejan Jovanovic</h1>
+    <p class="text-gray-400 mb-8">Junior PHP / Laravel Developer</p>
+
+    <div class="w-full max-w-md flex flex-col gap-4">
+        <a href="https://github.com/tvojekorisnickoime" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">💻 GitHub</a>
+        <a href="https://linkedin.com/in/tvojekorisnickoime" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">🔗 LinkedIn</a>
+        <a href="mailto:tvojemail@example.com" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📧 Email</a>
+        <a href="{{route('blog_page')}}" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📂 Projekti</a>
+        <a href="https://example.com" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">🌐 Portfolio Demo</a>
+    </div>
+</main>

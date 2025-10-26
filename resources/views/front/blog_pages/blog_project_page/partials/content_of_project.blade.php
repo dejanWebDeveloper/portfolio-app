@@ -28,3 +28,4 @@
     <a href="{{$singleProject->demo_link}}"
        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-full transition-all duration-300">Demo</a>
 </section>
+</main>
