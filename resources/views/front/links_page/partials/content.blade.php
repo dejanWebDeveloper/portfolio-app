@@ -4,10 +4,10 @@
     <p class="text-gray-400 mb-8">Junior PHP / Laravel Developer</p>
 
     <div class="w-full max-w-md flex flex-col gap-4">
-        <a href="https://github.com/tvojekorisnickoime" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">💻 GitHub</a>
-        <a href="https://linkedin.com/in/tvojekorisnickoime" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">🔗 LinkedIn</a>
-        <a href="mailto:tvojemail@example.com" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📧 Email</a>
-        <a href="{{route('blog_page')}}" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📂 Projekti</a>
+        <a href="https://github.com/dejanWebDeveloper" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/dejan-jovanovic-656b85355/" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">🔗 LinkedIn</a>
+        <a href="mailto:dejan_web@outlook.com" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📧 Email</a>
+        <a href="{{route('blog_page')}}" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">📂 Projects</a>
         <a href="https://example.com" target="_blank" class="w-full text-center bg-gray-800 hover:bg-indigo-600 py-3 rounded-full transition">🌐 Portfolio Demo</a>
     </div>
 </main>
