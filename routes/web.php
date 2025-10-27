@@ -15,12 +15,12 @@ Route::post('send-email', [\App\Http\Controllers\Front\ContactController::class,
 Route::get('/reset-forgotten-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'forgottenPassword'])->name('forgotten_password');
 Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'resetForgottenPassword'])->name('reset_forgotten_password');
 
-Route::prefix('/blog')->name('blog_')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Front\BlogController::class, 'blog'])->name('page');
-    Route::get('/category/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogCategory'])->name('category_page');
-    Route::get('/post/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogProject'])->name('project_page');
-    Route::get('/search', [\App\Http\Controllers\Front\BlogController::class, 'blogSearch'])->name('search_page');
-    Route::get('/tag/{id}/{slug}', [\App\Http\Controllers\Front\BlogController::class, 'blogTag'])->name('tag_page');
+Route::prefix('/project')->name('projects_')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Front\ProjectController::class, 'projects'])->name('page');
+    Route::get('/category/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'projectCategory'])->name('category_page');
+    Route::get('/post/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'project'])->name('project_page');
+    Route::get('/search', [\App\Http\Controllers\Front\ProjectController::class, 'projectSearch'])->name('search_page');
+    Route::get('/tag/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'projectTag'])->name('tag_page');
 });
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 

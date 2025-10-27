@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Repositories\Front\ProjectRepository;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class ProjectController extends Controller
 {
     protected $projects;
 
@@ -16,14 +16,14 @@ class BlogController extends Controller
         $this->projects = $projects;
     }
 
-    public function blog()
+    public function projects()
     {
-        $blogProjects = $this->projects->getBlogProjects();
+        $projects = $this->projects->getBlogProjects();
 
-        return view('front.project_pages.blog_page.blog_page', compact('blogProjects'));
+        return view('front.project_pages.projects_page.projects_page', compact('projects'));
     }
 
-    public function blogCategory($id, $slug)
+    public function projectCategory($id, $slug)
     {
         $category = Category::where('slug', $slug)->where('id', $id)->firstOrFail();
         $categoryProjects = $this->projects->getCategoryProjects($category->id);
@@ -33,14 +33,14 @@ class BlogController extends Controller
         ));
     }
 
-    public function blogProject($id, $slug)
+    public function project($id, $slug)
     {
         $singleProject = $this->projects->getSingleProject($id, $slug);
         $this->projects->incrementProjectViews($singleProject);
         $singleProjectTags = $singleProject->tags()->get();
         $prevProject = $this->projects->getPrevProject($id, $singleProject);
         $nextProject = $this->projects->getNextProject($id, $singleProject);
-        return view('front.project_pages.blog_project_page.blog_project_page', compact(
+        return view('front.project_pages.single_project_page.project_page', compact(
             'singleProject',
             'singleProjectTags',
             'prevProject',
@@ -48,7 +48,7 @@ class BlogController extends Controller
         ));
     }
 
-    public function blogSearch(Request $request)
+    public function projectSearch(Request $request)
     {
         $query = $request->input('search');
         $results = $this->projects->getProjectsResult($query);

@@ -1,3 +1,3 @@
 <nav aria-label="Page navigation example">
-    {{ $blogProjects->withQueryString()->links('pagination::bootstrap-4') }}
+    {{ $projects->withQueryString()->links('pagination::bootstrap-4') }}
 </nav>

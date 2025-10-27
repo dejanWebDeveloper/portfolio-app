@@ -24,7 +24,7 @@
 
         <div class="flex flex-wrap justify-center md:justify-start gap-4">
             <a
-                href="{{route('blog_page')}}"
+                href="{{route('projects_page')}}"
                 class="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-full text-white transition-all duration-300"
             >
                 Projects
