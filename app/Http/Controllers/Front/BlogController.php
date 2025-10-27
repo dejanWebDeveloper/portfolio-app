@@ -20,14 +20,14 @@ class BlogController extends Controller
     {
         $blogProjects = $this->projects->getBlogProjects();
 
-        return view('front.blog_pages.blog_page.blog_page', compact('blogProjects'));
+        return view('front.project_pages.blog_page.blog_page', compact('blogProjects'));
     }
 
     public function blogCategory($id, $slug)
     {
         $category = Category::where('slug', $slug)->where('id', $id)->firstOrFail();
         $categoryProjects = $this->projects->getCategoryProjects($category->id);
-        return view('front.blog_pages.blog_category_page.blog_category_page', compact(
+        return view('front.project_pages.blog_category_page.blog_category_page', compact(
             'category',
             'categoryProjects'
         ));
@@ -40,7 +40,7 @@ class BlogController extends Controller
         $singleProjectTags = $singleProject->tags()->get();
         $prevProject = $this->projects->getPrevProject($id, $singleProject);
         $nextProject = $this->projects->getNextProject($id, $singleProject);
-        return view('front.blog_pages.blog_project_page.blog_project_page', compact(
+        return view('front.project_pages.blog_project_page.blog_project_page', compact(
             'singleProject',
             'singleProjectTags',
             'prevProject',
@@ -52,7 +52,7 @@ class BlogController extends Controller
     {
         $query = $request->input('search');
         $results = $this->projects->getProjectsResult($query);
-        return view('front.blog_pages.blog_search_page.blog_search_page', compact(
+        return view('front.project_pages.blog_search_page.blog_search_page', compact(
             'results',
             'query'
         ));
