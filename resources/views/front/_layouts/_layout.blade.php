@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('front._layouts._head_link')
-<body class="bg-gray-950 text-gray-100 font-sans">
+<body class="bg-gray-950 text-gray-100 font-sans" style="visibility:hidden" onload="document.body.style.visibility='visible'">
 @if (!isset($nullHeader))
     @include('front._layouts._header')
 @endif
