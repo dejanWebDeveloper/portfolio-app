@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
@@ -7,38 +8,6 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class PhotoService
 {
-    public function save($photo, $model, $field, $path = 'photo/author/')
-    {
-        $photoName = $model->id . '_' . $field . '_' . Str::uuid() . '.jpg';
-        $relativePath = $path . $photoName;
-
-        if (!empty($model->$field)) {
-            $this->delete($model, $field, $path);
-        }
-
-        $image = Image::read($photo)
-            ->cover(256, 256)
-            ->toJpeg(90);
-
-        Storage::disk('public')->put($relativePath, (string)$image);
-
-        $model->$field = $photoName;
-        $model->save();
-    }
-
-    public function delete($model, $field, $path = 'photo/author/')
-    {
-        if (empty($model->$field)) return;
-
-        $filePath = $path . $model->$field;
-        if (Storage::disk('public')->exists($filePath)) {
-            Storage::disk('public')->delete($filePath);
-        }
-
-        $model->$field = null;
-        $model->save();
-    }
-
     public function saveProjectPhoto($photo, $project, $field)
     {
         // Generate unique filenames
@@ -105,6 +74,7 @@ class PhotoService
 
         return true;
     }
+
     public function saveUserPhoto($photo, $user, $field)
     {
         // Generate unique filename
@@ -122,7 +92,7 @@ class PhotoService
             ->cover(256, 256)
             ->toJpeg(90);
         // Save new photo to storage
-        Storage::disk('public')->put($relativePath, (string) $image);
+        Storage::disk('public')->put($relativePath, (string)$image);
         // Update DB (store only filename if you prefer)
         $user->$field = $photoName;
         $user->save();
