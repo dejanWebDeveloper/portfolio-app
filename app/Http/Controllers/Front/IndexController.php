@@ -16,11 +16,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        $latestProjectsSlider = $this->projects->getLatestProjects();
-
-        return view('front.index_page.index', compact(
-          'latestProjectsSlider'
-        ));
+        return view('front.index_page.index');
     }
     public function getLinksPage()
     {

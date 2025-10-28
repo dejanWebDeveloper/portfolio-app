@@ -23,7 +23,7 @@ class ProjectController extends Controller
         return view('front.project_pages.projects_page.projects_page', compact('projects'));
     }
 
-    public function projectCategory($id, $slug)
+    /*public function projectCategory($id, $slug)
     {
         $category = Category::where('slug', $slug)->where('id', $id)->firstOrFail();
         $categoryProjects = $this->projects->getCategoryProjects($category->id);
@@ -31,20 +31,16 @@ class ProjectController extends Controller
             'category',
             'categoryProjects'
         ));
-    }
+    }*/
 
     public function project($id, $slug)
     {
         $singleProject = $this->projects->getSingleProject($id, $slug);
         $this->projects->incrementProjectViews($singleProject);
         $singleProjectTags = $singleProject->tags()->get();
-        $prevProject = $this->projects->getPrevProject($id, $singleProject);
-        $nextProject = $this->projects->getNextProject($id, $singleProject);
         return view('front.project_pages.single_project_page.project_page', compact(
             'singleProject',
-            'singleProjectTags',
-            'prevProject',
-            'nextProject',
+            'singleProjectTags'
         ));
     }
 
