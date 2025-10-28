@@ -23,16 +23,6 @@ class ProjectController extends Controller
         return view('front.project_pages.projects_page.projects_page', compact('projects'));
     }
 
-    /*public function projectCategory($id, $slug)
-    {
-        $category = Category::where('slug', $slug)->where('id', $id)->firstOrFail();
-        $categoryProjects = $this->projects->getCategoryProjects($category->id);
-        return view('front.project_pages.blog_category_page.blog_category_page', compact(
-            'category',
-            'categoryProjects'
-        ));
-    }*/
-
     public function project($id, $slug)
     {
         $singleProject = $this->projects->getSingleProject($id, $slug);
