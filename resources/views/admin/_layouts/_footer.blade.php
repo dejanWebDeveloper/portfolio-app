@@ -4,5 +4,5 @@
         PHP Laravel - Portfolio
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2025 <p>Dejan Jovanovic</p>.</strong> All rights reserved.
+    <strong>&copy; 2025 Dejan Jovanovic.</strong> All rights reserved.
 </footer>
