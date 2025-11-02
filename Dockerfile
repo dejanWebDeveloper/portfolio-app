@@ -1,42 +1,31 @@
-# 1️⃣ Base PHP image
-FROM php:8.2-fpm
+# 1️⃣ Base image - PHP 8.3 FPM
+FROM php:8.3-fpm
 
 # 2️⃣ Instalacija sistema i PHP ekstenzija
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libpq-dev \
-    libzip-dev \
-    curl \
-    zip \
-    libonig-dev \
-    libxml2-dev \
-    nodejs \
-    npm \
- && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath xml ctype \
- && apt-get clean && rm -rf /var/lib/apt/lists/*
+    git unzip libpq-dev libzip-dev curl zip libonig-dev libxml2-dev \
+    libpng-dev libjpeg-dev libfreetype6-dev \
+    nodejs npm \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath tokenizer xml ctype gd exif \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3️⃣ Instalacija Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# 4️⃣ Postavi radni direktorijum
+# 3️⃣ Set radni direktorij
 WORKDIR /app
 
-# 5️⃣ Kopiraj ceo kod
-COPY . .
-
-# 6️⃣ Instalacija PHP zavisnosti
+# 4️⃣ Kopiranje composer datoteka i instalacija PHP zavisnosti
+COPY composer.lock composer.json ./
 RUN composer install --no-dev --optimize-autoloader
 
-# 7️⃣ Generisanje APP_KEY
-# Render automatski generiše APP_KEY, možeš da preskočiš ovo
-# RUN php artisan key:generate
+# 5️⃣ Kopiranje ostatka aplikacije
+COPY . .
 
-# 8️⃣ Build frontenda (Tailwind + jQuery)
+# 6️⃣ Generisanje APP_KEY (samo ako .env postoji)
+RUN if [ -f .env ]; then php artisan key:generate; fi
+
+# 7️⃣ Instalacija Node zavisnosti i build frontenda
 RUN npm install && npm run build
 
-# 9️⃣ Expose port
-EXPOSE 8000
-
-# 🔟 Start Laravel server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# 8️⃣ Expose port i start komande
+EXPOSE 9000
+CMD ["php-fpm"]
