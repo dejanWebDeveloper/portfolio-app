@@ -1,37 +1,24 @@
 # 1️⃣ PHP base image
 FROM php:8.2-cli
 
-# 2️⃣ Instalacija sistema i PHP build alata
+# 2️⃣ Instalacija sistema i build alata
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    zip \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    libpq-dev \
-    build-essential \
-    pkg-config \
-    libpng-dev \
-    zlib1g-dev \
-    libsqlite3-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    git unzip curl zip libonig-dev libxml2-dev libzip-dev libpq-dev \
+    build-essential pkg-config libpng-dev zlib1g-dev libsqlite3-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 3️⃣ Instalacija PHP ekstenzija
-RUN docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath tokenizer xml ctype
+RUN docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath xml
 
 # 4️⃣ Instalacija Node.js (za Tailwind)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 5️⃣ Instalacija Composer-a
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 6️⃣ Setovanje radnog direktorijuma
+# 6️⃣ Radni direktorijum
 WORKDIR /app
 
 # 7️⃣ Kopiranje projekta
