@@ -1,30 +1,39 @@
-# 1. Koristimo PHP CLI sa potrebnim ekstenzijama
+# 1️⃣ Bazni PHP image
 FROM php:8.2-cli
 
-# 2. Instaliramo sistemske zavisnosti
+# 2️⃣ Instalacija sistemskih paketa i zavisnosti
 RUN apt-get update && apt-get install -y \
-    git unzip libpq-dev libzip-dev curl zip
+    git \
+    unzip \
+    libpq-dev \
+    libzip-dev \
+    curl \
+    zip \
+    libonig-dev \
+    nodejs \
+    npm \
+    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath
 
-# 3. Instaliramo PHP ekstenzije
-RUN docker-php-ext-install pdo pdo_pgsql zip
-
-# 4. Instaliramo Composer
+# 3️⃣ Instalacija Composer-a
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 5. Setujemo radni direktorijum u container-u
+# 4️⃣ Setovanje radnog direktorijuma
 WORKDIR /app
 
-# 6. Kopiramo ceo projekat u container
+# 5️⃣ Kopiranje celog projekta
 COPY . .
 
-# 7. Instaliramo PHP zavisnosti
+# 6️⃣ Instalacija PHP zavisnosti
 RUN composer install --no-dev --optimize-autoloader
 
-# 8. Generišemo APP_KEY
+# 7️⃣ Generisanje APP_KEY
 RUN php artisan key:generate
 
-# 9. Expose port koji će Laravel koristiti
+# 8️⃣ Instalacija frontend zavisnosti (Tailwind + jQuery)
+RUN npm install && npm run build
+
+# 9️⃣ Otvoreni port
 EXPOSE 8000
 
-# 10. Start komanda za Laravel
+# 🔟 Start Laravel server
 CMD php artisan serve --host=0.0.0.0 --port=8000
