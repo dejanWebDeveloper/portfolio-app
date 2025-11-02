@@ -1,5 +1,5 @@
 <div class="btn-group">
-    <a href="{{route('blog_project_page', ['id'=>$row->id, 'slug'=>$row->slug])}}" class="btn btn-info" target="_blank">
+    <a href="{{route('projects_project_page', ['id'=>$row->id, 'slug'=>$row->slug])}}" class="btn btn-info" target="_blank">
         <i class="fas fa-eye"></i>
     </a>
     <a href="{{route('admin.projects.edit', ['id'=>$row->id, 'slug'=>$row->slug])}}" class="btn btn-info">

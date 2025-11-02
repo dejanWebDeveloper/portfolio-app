@@ -18,7 +18,7 @@ Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordControll
 Route::prefix('/project')->name('projects_')->group(function () {
     Route::get('/', [\App\Http\Controllers\Front\ProjectController::class, 'projects'])->name('page');
     Route::get('/category/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'projectCategory'])->name('category_page');
-    Route::get('/post/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'project'])->name('project_page');
+    Route::get('/project/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'project'])->name('project_page');
     Route::get('/search', [\App\Http\Controllers\Front\ProjectController::class, 'projectSearch'])->name('search_page');
     Route::get('/tag/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'projectTag'])->name('tag_page');
 });
