@@ -23,9 +23,7 @@ Route::prefix('/project')->name('projects_')->group(function () {
     Route::get('/tag/{id}/{slug}', [\App\Http\Controllers\Front\ProjectController::class, 'projectTag'])->name('tag_page');
 });
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-
     Route::resource('index', IndexController::class)->only('index');
-
     Route::resource('categories', CategoryController::class)->except(['show', 'edit']);
     Route::prefix('/categories')->name('categories.')->group(function () {
         Route::post('/ajax-category-datatable', [\App\Http\Controllers\Admin\CategoryController::class, 'datatable'])->name('datatable');

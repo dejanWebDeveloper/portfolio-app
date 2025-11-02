@@ -3,7 +3,7 @@
 @section('content')
     <div class="login-box">
         <div class="login-logo">
-            <a class="text-decoration-none" href="{{route('index_page')}}"><b>Cubes</b>BLOG</a>
+            <a class="text-decoration-none" href="{{route('index_page')}}"><b>Portfolio</b> ADMIN</a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
