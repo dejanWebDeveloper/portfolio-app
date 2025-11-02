@@ -1,38 +1,31 @@
-# 1️⃣ Bazni PHP image
+# 1. PHP image
 FROM php:8.2-cli
 
-# 2️⃣ Instalacija sistemskih paketa i zavisnosti
+# 2. Instalacija sistema i PHP ekstenzija
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libpq-dev \
-    libzip-dev \
-    curl \
-    zip \
-    libonig-dev \
-    nodejs \
-    npm \
-    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath
+    git unzip libpq-dev libzip-dev curl zip libonig-dev libxml2-dev \
+    nodejs npm \
+    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath tokenizer xml ctype
 
-# 3️⃣ Instalacija Composer-a
+# 3. Instalacija Composer-a
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 4️⃣ Setovanje radnog direktorijuma
+# 4. Setovanje radnog direktorijuma
 WORKDIR /app
 
-# 5️⃣ Kopiranje celog projekta
+# 5. Kopiranje projekta
 COPY . .
 
-# 6️⃣ Instalacija PHP zavisnosti
+# 6. Instalacija PHP zavisnosti
 RUN composer install --no-dev --optimize-autoloader
 
-# 7️⃣ Generisanje APP_KEY
+# 7. Generisanje APP_KEY
 RUN php artisan key:generate
 
-# 8️⃣ Instalacija frontend zavisnosti (Tailwind + jQuery)
+# 8. Frontend build (Tailwind + jQuery)
 RUN npm install && npm run build
 
-# 9️⃣ Otvoreni port
+# 9. Expose port
 EXPOSE 8000
 
 # 🔟 Start Laravel server
