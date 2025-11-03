@@ -25,9 +25,6 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # 7️⃣ Build frontend-a (ako koristiš Vite)
 RUN npm install && npm run build
 
-# 8️⃣ Generiši APP_KEY (ako ne postoji)
-RUN php artisan key:generate --force
-
 # 9️⃣ Expose port (Render koristi port iz $PORT promenljive)
 EXPOSE 8000
 
