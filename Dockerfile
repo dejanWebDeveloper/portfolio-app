@@ -1,31 +1,34 @@
-# 1️⃣ Base image - PHP 8.3 FPM
-FROM php:8.3-fpm
+# 1️⃣ Baza — PHP sa Composer-om
+FROM php:8.2-fpm
 
 # 2️⃣ Instalacija sistema i PHP ekstenzija
 RUN apt-get update && apt-get install -y \
     git unzip libpq-dev libzip-dev curl zip libonig-dev libxml2-dev \
-    libpng-dev libjpeg-dev libfreetype6-dev \
-    nodejs npm \
+    libpng-dev libjpeg-dev libfreetype6-dev nodejs npm \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath tokenizer xml ctype gd exif \
+    && docker-php-ext-install pdo pdo_pgsql zip mbstring bcmath xml ctype gd exif \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 3️⃣ Set radni direktorij
-WORKDIR /app
+# 3️⃣ Instalacija Composer-a (globalno)
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 4️⃣ Kopiranje composer datoteka i instalacija PHP zavisnosti
-COPY composer.lock composer.json ./
-RUN composer install --no-dev --optimize-autoloader
-
-# 5️⃣ Kopiranje ostatka aplikacije
+# 4️⃣ Kopiramo aplikaciju
+WORKDIR /var/www/html
 COPY . .
 
-# 6️⃣ Generisanje APP_KEY (samo ako .env postoji)
-RUN if [ -f .env ]; then php artisan key:generate; fi
+# 5️⃣ Instalacija Laravel dependencija
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# 7️⃣ Instalacija Node zavisnosti i build frontenda
+# 6️⃣ Build frontend-a (ako koristiš Vite)
 RUN npm install && npm run build
 
-# 8️⃣ Expose port i start komande
-EXPOSE 9000
-CMD ["php-fpm"]
+# 7️⃣ Laravel permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# 8️⃣ Environment
+ENV APP_ENV=production
+ENV APP_DEBUG=false
+
+# 9️⃣ Pokretanje PHP servera (Render automatski koristi port 10000)
+EXPOSE 10000
+CMD php artisan serve --host=0.0.0.0 --port=10000
