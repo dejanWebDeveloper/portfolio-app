@@ -25,11 +25,20 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # 7️⃣ Build frontend-a (ako koristiš Vite)
 RUN npm install && npm run build
 
-# 8️⃣ Poveži storage folder sa public
-RUN php artisan storage:link || true
+# 8️⃣ Poveži storage folder sa public i postavi permisije
+RUN rm -f public/storage \
+    && php artisan storage:link \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
-# 9️⃣ Expose port (Render koristi port iz $PORT promenljive)
+# 9️⃣ Očisti keš i konfiguraciju
+RUN php artisan config:clear \
+    && php artisan cache:clear \
+    && php artisan route:clear \
+    && php artisan view:clear
+
+# 🔟 Expose port (Render koristi port iz $PORT promenljive)
 EXPOSE 8000
 
-# 🔟 Pokreni Laravel
-CMD php artisan serve --host=0.0.0.0 --port=$PORT
+# 1️⃣1️⃣ Pokreni Laravel server
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
