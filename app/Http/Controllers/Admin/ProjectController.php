@@ -97,6 +97,7 @@ class ProjectController extends Controller
             'author' => ['required', 'string'],
             'github_link' => ['required', 'string', 'url'],
             'demo_link' => ['string', 'url'],
+            'priority' => ['numeric', 'nullable', 'min:1', 'max:10'],
             'tags' => ['required', 'array', 'min:2'],
             'tags.*' => ['required', 'numeric', 'exists:tags,id'],
             'first-photo' => ['file', 'mimes:jpeg,png,jpg', 'max:1000'],

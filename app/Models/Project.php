@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
@@ -34,7 +35,8 @@ class Project extends Model
     public function imageUrl()
     {
         if (!is_null($this->photo)) {
-            return asset('storage/photo/' . $this->photo);
+            //return asset('storage/photo/' . $this->photo);
+            return Storage::url('photo/' . $this->photo);
         }
 
         // Default photo
