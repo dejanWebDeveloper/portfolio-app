@@ -28,10 +28,10 @@ RUN npm install && npm run build
 # 8️⃣ Poveži storage folder sa public i postavi permisije
 RUN rm -f public/storage \
     && php artisan storage:link \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+    && chown -R www-data:www-data storage bootstrap/cache public/storage \
+    && chmod -R 775 storage bootstrap/cache public/storage
 
-# 9️⃣ Očisti keš i konfiguraciju
+# 9️⃣ Očisti Laravel keš i konfiguraciju
 RUN php artisan config:clear \
     && php artisan cache:clear \
     && php artisan route:clear \

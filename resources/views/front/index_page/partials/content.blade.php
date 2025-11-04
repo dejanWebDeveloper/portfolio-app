@@ -2,7 +2,7 @@
     <!-- Leva strana: slika -->
     <div class="flex-shrink-0">
         <img
-            src="{{ asset('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396') }}"
+            src="{{ asset('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396.jpeg') }}"
             alt="Your name"
             class="rounded-full w-72 h-72 object-cover border-4 border-indigo-600 shadow-lg hover:scale-105 transition-transform duration-300"
         />
