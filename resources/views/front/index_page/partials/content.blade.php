@@ -2,7 +2,7 @@
     <!-- Leva strana: slika -->
     <div class="flex-shrink-0">
         <img
-            src="{{ asset('photo/profile_photo.jpeg') }}"
+            src="{{ asset('photo/dejan_jovanovic.jpg') }}"
             alt="Your name"
             class="rounded-full w-72 h-72 object-cover border-4 border-indigo-600 shadow-lg hover:scale-105 transition-transform duration-300"
         />
