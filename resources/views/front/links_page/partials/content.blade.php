@@ -1,5 +1,5 @@
 <main class="pb-32 pt-32 flex flex-col items-center px-6">
-    <img src="{{url('storage/photo/user/1_profile_photo_09f0c10d-f35a-482b-a9b7-cf6ae5c77396')}}" alt="Dejan Jovanovic" class="rounded-full w-32 h-32 mb-6 border-4 border-indigo-600 shadow-lg" />
+    <img src="{{asset('photo/profile_photo.jpeg')}}" alt="Dejan Jovanovic" class="rounded-full w-32 h-32 mb-6 border-4 border-indigo-600 shadow-lg" />
     <h1 class="text-3xl font-bold mb-2">Dejan Jovanovic</h1>
     <p class="text-gray-400 mb-8">Junior PHP / Laravel Developer</p>
 
