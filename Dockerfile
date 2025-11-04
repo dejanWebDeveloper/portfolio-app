@@ -25,6 +25,9 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # 7️⃣ Build frontend-a (ako koristiš Vite)
 RUN npm install && npm run build
 
+# 8️⃣ Poveži storage folder sa public
+RUN php artisan storage:link || true
+
 # 9️⃣ Expose port (Render koristi port iz $PORT promenljive)
 EXPOSE 8000
 
