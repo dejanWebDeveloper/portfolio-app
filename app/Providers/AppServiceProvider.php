@@ -2,12 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Category;
-use App\Models\Project;
-use App\Models\Tag;
-use Carbon\Carbon;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
 
     }
 }
