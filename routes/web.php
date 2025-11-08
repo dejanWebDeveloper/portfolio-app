@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/run-migrations', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return 'Migracije pokrenute!';
-});
 
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
