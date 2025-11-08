@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('/run-seeders', function () {
+    Artisan::call('db:seed', [
+        '--class' => 'Database\\Seeders\\UsersSeeder',
+        '--force' => true
+    ]);
+    return "Seeder je pokrenut!";
+});
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
 Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'contact'])->name('contact_page');
