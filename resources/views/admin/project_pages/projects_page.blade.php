@@ -255,6 +255,11 @@
                 allowClear: true
             });
             //plugin za data tables
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $('#projects-table').DataTable({
                 serverSide: true,
                 processing: true,
@@ -262,7 +267,6 @@
                     url: "{{ route('admin.projects.datatable') }}",
                     type: "post",
                     data: function (d) {
-                        d._token = "{{ csrf_token() }}";
                         d.heading = $('input[name=heading]').val();
                         d.category_id = $('select[name=category_id]').val();
                         d.enable = $('select[name=enable]').val();
