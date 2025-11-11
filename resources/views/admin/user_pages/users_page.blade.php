@@ -165,6 +165,11 @@
                 placeholder: "Status",
                 allowClear: true
             });
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             //plugin za data tables
             $('#users-table').DataTable({
                 serverSide: true,
@@ -172,20 +177,18 @@
                 ajax: {
                     url: "{{ route('admin.users.datatable') }}",
                     type: "post",
-                    data: function (d) {
-                        d._token = "{{ csrf_token() }}";
-                    }
+
                 },
                 order: [[6, "asc"]],
                 columns: [
                     {data: "id", name: "id", className: 'text-center'},
-                    {data: "status", name: "Status", className: 'text-center'},
-                    {data: "profile_photo", name: "Photo", orderable: false, searchable: false, className: 'text-center'},
-                    {data: "email", name: "Email", className: 'text-center'},
-                    {data: "name", name: "Name", className: 'text-center'},
-                    {data: "phone", name: "Phone", className: 'text-center'},
-                    {data: "created_at", name: "Created_at", searchable: false, className: 'text-center'},
-                    {data: "actions", name: "Actions", orderable: false, searchable: false, className: 'text-center'}
+                    {data: "status", name: "status", className: 'text-center'},
+                    {data: "profile_photo", name: "photo", orderable: false, searchable: false, className: 'text-center'},
+                    {data: "email", name: "email", className: 'text-center'},
+                    {data: "name", name: "name", className: 'text-center'},
+                    {data: "phone", name: "phone", className: 'text-center'},
+                    {data: "created_at", name: "created_at", searchable: false, className: 'text-center'},
+                    {data: "actions", name: "actions", orderable: false, searchable: false, className: 'text-center'}
                 ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 20]

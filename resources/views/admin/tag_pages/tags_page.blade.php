@@ -102,6 +102,11 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             //plugin za data tables
             $('#tags-table').DataTable({
                 serverSide: true,
@@ -109,16 +114,14 @@
                 ajax: {
                     url: "{{ route('admin.tags.datatable') }}",
                     type: "post",
-                    data: function (d) {
-                        d._token = "{{ csrf_token() }}";
-                    }
+
                 },
                 order: [[2, "desc"]],
                 columns: [
                     {data: "id", name: "id", className: 'text-center'},
-                    {data: "name", name: "Name"},
-                    {data: "created_at", name: "Created_at", searchable: false, className: 'text-center'},
-                    {data: "actions", name: "Actions", orderable: false, searchable: false, className: 'text-center'}
+                    {data: "name", name: "name"},
+                    {data: "created_at", name: "created_at", searchable: false, className: 'text-center'},
+                    {data: "actions", name: "actions", orderable: false, searchable: false, className: 'text-center'}
                 ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 20]

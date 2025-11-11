@@ -121,6 +121,11 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             //plugin za data tables
             $('#categories-table').DataTable({
                 serverSide: true,
@@ -129,16 +134,16 @@
                     url: "{{ route('admin.categories.datatable') }}",
                     type: "post",
                     data: function (d) {
-                        d._token = "{{ csrf_token() }}";
+
                         d.name = $('input[name=name]').val();
                     }
                 },
                 order: [[3, "asc"]],
                 columns: [
                     {data: "id", name: "id", className: 'text-center'},
-                    {data: "name", name: "Name"},
-                    {data: "created_at", name: "Created_at", searchable: false, className: 'text-center'},
-                    {data: "actions", name: "Actions", orderable: false, searchable: false, className: 'text-center'}
+                    {data: "name", name: "name"},
+                    {data: "created_at", name: "created_at", searchable: false, className: 'text-center'},
+                    {data: "actions", name: "actions", orderable: false, searchable: false, className: 'text-center'}
                 ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 20]
