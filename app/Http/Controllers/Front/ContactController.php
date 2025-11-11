@@ -22,8 +22,11 @@ class ContactController extends Controller
             'message' => ['required', 'string', 'min:5', 'max:500'],
             'g-recaptcha-response' => new ReCaptcha()
         ]);
-        Mail::to('dejan_web@outlook.com')->send(new ContactUs($data['name'], $data['email'], $data['message']));
+        //Mail::to('dejan_web@outlook.com')->send(new ContactUs($data['name'], $data['email'], $data['message']));
+        Mail::to('dejan_web@outlook.com')
+            ->send(new ContactUs($data['name'], $data['email'], $data['message']));
         session()->put('system_message', 'Your message has been received!');
         return redirect()->back();
     }
+
 }
