@@ -139,7 +139,6 @@ class ProjectRepository
 
         $data['enable'] = 1;
         $data['important'] = 0;
-        $data['created_at'] = now();
         $data['text'] = strip_tags($data['text'], '<img>');
         $projectForEdit->fill($data)->save();
         //table tags
