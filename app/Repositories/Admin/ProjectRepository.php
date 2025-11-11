@@ -58,7 +58,12 @@ class ProjectRepository
         $data['slug'] = $slug;
         $lastProject = Project::orderByDesc('priority')->first();
         if (!$data['priority']){
-            $data['priority'] = $lastProject->priority + 1;
+            if($lastProject->priority){
+                $data['priority'] = $lastProject->priority + 1;
+            }
+            else{
+                $data['priority'] = 1;
+            }
         }else{
             $projects = Project::all();
             $projectPriorities = $projects->pluck('priority')->toArray();
