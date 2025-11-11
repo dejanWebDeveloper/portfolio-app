@@ -18,12 +18,13 @@ class ProjectRepository
     {
         $this->photoService = $photoService;
     }
+
     public function projectContent()
     {
         return [
             'categories' => Category::all(),
             'tags' => Tag::all()
-            ];
+        ];
     }
 
     public function dataTable(Request $request)
@@ -56,27 +57,22 @@ class ProjectRepository
             $slug = $originalSlug . '-' . $counter++;
         }
         $data['slug'] = $slug;
+
         $lastProject = Project::orderByDesc('priority')->first();
-        if (!$data['priority']){
-            if($lastProject->priority){
-                $data['priority'] = $lastProject->priority + 1;
-            }
-            else{
-                $data['priority'] = 1;
-            }
-        }else{
-            $projects = Project::all();
-            $projectPriorities = $projects->pluck('priority')->toArray();
-            $incrementProjects = Project::where('priority', '>=', $data['priority'])
+        if (!$data['priority']) {
+            // Ako nije postavljen prioritet, uzmi sledeći najveći
+            $data['priority'] = $lastProject ? $lastProject->priority + 1 : 1;
+        } else {
+            // Pomeramo sve projekte sa istim ili većim prioritetom
+            $conflictingProjects = Project::where('priority', '>=', $data['priority'])
                 ->orderByDesc('priority')
                 ->get();
-            if (in_array($data['priority'], $projectPriorities)){
-                foreach ($incrementProjects as $incrementProject){
-                    $incrementProject->priority += 1;
-                    $incrementProject->save();
-                }
+
+            foreach ($conflictingProjects as $project) {
+                $project->increment('priority'); // direktno u SQL-u
             }
         }
+
         $data['enable'] = 1;
         $data['created_at'] = now();
         $data['text'] = strip_tags($data['text'], '<img>');
@@ -87,6 +83,7 @@ class ProjectRepository
         return $project;
 
     }
+
     public function deleteProject($data)
     {
         $project = Project::findOrFail($data['project_for_delete_id']);
@@ -105,6 +102,7 @@ class ProjectRepository
         // Finally delete the project
         $project->delete();
     }
+
     public function editProject($id, $slug)
     {
         return Project::where('slug', $slug)->where('id', $id)->firstOrFail();
@@ -119,16 +117,16 @@ class ProjectRepository
             $slug = $originalSlug . '-' . $counter++;
         }
         $data['slug'] = $slug;
-        if (!$data['priority']){
+        if (!$data['priority']) {
             $data['priority'] = $projectForEdit->priority;
-        }else{
+        } else {
             $projects = Project::all();
             $projectPriorities = $projects->pluck('priority')->toArray();
             $incrementProjects = Project::where('priority', '>=', $data['priority'])
                 ->orderByDesc('priority')
                 ->get();
-            if (in_array($data['priority'], $projectPriorities)){
-                foreach ($incrementProjects as $incrementProject){
+            if (in_array($data['priority'], $projectPriorities)) {
+                foreach ($incrementProjects as $incrementProject) {
                     $incrementProject->priority += 1;
                     $incrementProject->save();
                 }
@@ -143,6 +141,7 @@ class ProjectRepository
         $projectForEdit->tags()->sync($data['tags']);
         return $projectForEdit;
     }
+
     public function deletePhotoJS($projectForEdit)
     {
         if ($projectForEdit->photo) {
@@ -151,12 +150,14 @@ class ProjectRepository
             $projectForEdit->save();
         }
     }
+
     public function disableOneProject($data)
     {
         $project = Project::findOrFail($data['project_for_disable_id']);
         $project->enable = 0;
         $project->save();
     }
+
     public function enableOneProject($data)
     {
         $project = Project::findOrFail($data['project_for_enable_id']);
