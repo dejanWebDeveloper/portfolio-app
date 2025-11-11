@@ -276,16 +276,16 @@
                 order: [[9, "desc"]],
                 columns: [
                     {data: "id", name: "id", className: 'text-center'},
-                    {data: "photo", name: "Photo", orderable: false, searchable: false, className: 'text-center'},
-                    {data: "heading", name: "Heading"},
-                    {data: "enable", name: "Enable", orderable: false, className: 'text-center'},
-                    {data: "category", name: "Category", className: 'text-center'},
-                    {data: "views", name: "Views", searchable: false, className: 'text-center'},
-                    {data: "github_link", name: "GitHub_link", className: 'text-center'},
-                    {data: "demo_link", name: "Demo_link", className: 'text-center'},
-                    {data: "priority", name: "Priority", className: 'text-center'},
-                    {data: "created_at", name: "Created_at", searchable: false, className: 'text-center'},
-                    {data: "actions", name: "Actions", orderable: false, searchable: false, className: 'text-center'}
+                    {data: "photo", name: "photo", orderable: false, searchable: false, className: 'text-center'},
+                    {data: "heading", name: "heading"},
+                    {data: "enable", name: "enable", orderable: false, className: 'text-center'},
+                    {data: "category", name: "category", className: 'text-center'},
+                    {data: "views", name: "views", searchable: false, className: 'text-center'},
+                    {data: "github_link", name: "github_link", className: 'text-center'},
+                    {data: "demo_link", name: "demo_link", className: 'text-center'},
+                    {data: "priority", name: "priority", className: 'text-center'},
+                    {data: "created_at", name: "created_at", searchable: false, className: 'text-center'},
+                    {data: "actions", name: "actions", orderable: false, searchable: false, className: 'text-center'}
                 ],
                 pageLength: 10,
                 lengthMenu: [5, 10, 15]
