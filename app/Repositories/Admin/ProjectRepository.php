@@ -117,14 +117,18 @@ class ProjectRepository
             $slug = $originalSlug . '-' . $counter++;
         }
         $data['slug'] = $slug;
-        if (!$data['priority']) {
-            $data['priority'] = $projectForEdit->priority;
+        // Ako nema priority, koristi postojeći ili poslednji priority +1, ili 1 ako tabela prazna
+        if (empty($data['priority'])) {
+            $lastProject = Project::orderByDesc('priority')->first();
+            $data['priority'] = $lastProject ? $lastProject->priority + 1 : 1;
         } else {
             $projects = Project::all();
             $projectPriorities = $projects->pluck('priority')->toArray();
+
             $incrementProjects = Project::where('priority', '>=', $data['priority'])
                 ->orderByDesc('priority')
                 ->get();
+
             if (in_array($data['priority'], $projectPriorities)) {
                 foreach ($incrementProjects as $incrementProject) {
                     $incrementProject->priority += 1;
@@ -132,6 +136,7 @@ class ProjectRepository
                 }
             }
         }
+
         $data['enable'] = 1;
         $data['important'] = 0;
         $data['created_at'] = now();
