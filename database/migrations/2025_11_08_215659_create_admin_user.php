@@ -15,9 +15,9 @@ return new class extends Migration {
                     'phone' => '0641234567',
                     'status' => 1,
                     'created_at' => now(),
-                    'updated_at' => now(),
-
-            ]);
+                    'updated_at' => now()
+                ]
+            );
         }
     }
 
