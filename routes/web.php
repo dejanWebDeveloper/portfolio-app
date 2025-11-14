@@ -8,7 +8,15 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+Route::get('/run-migrations-seeders', function () {
+    // Pokreće sve migracije
+    Artisan::call('migrate', ['--force' => true]);
 
+    // Pokreće seeder-e
+    Artisan::call('db:seed', ['--force' => true]);
+
+    return "Migracije i seed-ovi su uspešno izvršeni!";
+});
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
 Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'contact'])->name('contact_page');
