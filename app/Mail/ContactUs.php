@@ -33,13 +33,14 @@ class ContactUs extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->email, $this->name),
+            from: new Address('onboarding@resend.dev', 'Portfolio Contact Form'),
             replyTo: [
-                new Address($this->email, $this->name)
+                new Address($this->email, $this->name) // ovo je ok
             ],
             subject: 'New message from '.$this->name
         );
     }
+
 
     /**
      * Get the message content definition.
