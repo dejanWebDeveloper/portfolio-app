@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Onemogućava tranzakciju za ovu migraciju
+    public $withinTransaction = false;
+
     /**
      * Run the migrations.
      */

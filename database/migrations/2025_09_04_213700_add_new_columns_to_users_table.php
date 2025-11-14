@@ -6,15 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Onemogućava tranzakciju za ovu migraciju
+    public $withinTransaction = false;
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone', 20)->after('email');
-            $table->string('profile_photo')->nullable()->after('phone');
-            $table->boolean('status')->after('profile_photo');
+            $table->string('phone', 20)->nullable(); // after() se ignoriše u PostgreSQL
+            $table->string('profile_photo')->nullable();
+            $table->boolean('status')->default(true); // dodaj default da bi bilo sigurno
         });
     }
 
