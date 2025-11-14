@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Onemogućava transaction block za ovu migraciju
+    public $withinTransaction = false;
+
     /**
      * Run the migrations.
      */
@@ -13,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('cache', function (Blueprint $table) {
             $table->string('key')->primary();
-            $table->text('value'); // mediumText -> text u PostgreSQL
+            $table->text('value'); // mediumText -> text
             $table->integer('expiration')->check('expiration >= 0'); // integer >= 0
         });
 
@@ -29,7 +32,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cache');
         Schema::dropIfExists('cache_locks');
+        Schema::dropIfExists('cache');
     }
 };
