@@ -8,14 +8,18 @@ use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-Route::get('/run-migrations-seeders', function () {
-    // Pokreće sve migracije
-    Artisan::call('migrate', ['--force' => true]);
+Route::get('/run-fresh-migrations', function () {
+    try {
+        // Briše sve tabele i ponovo kreira migracije
+        Artisan::call('migrate:fresh', ['--force' => true]);
 
-    // Pokreće seeder-e
-    Artisan::call('db:seed', ['--force' => true]);
+        // Pokreće seed-ove
+        Artisan::call('db:seed', ['--force' => true]);
 
-    return "Migracije i seed-ovi su uspešno izvršeni!";
+        return "Migracije i seed-ovi su uspešno izvršeni!";
+    } catch (\Exception $e) {
+        return "Greška pri izvršavanju migracija: " . $e->getMessage();
+    }
 });
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
