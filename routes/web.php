@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 Route::get('/run-fresh-migrations', function () {
-
-    // Očisti potencijalnu prethodnu abort transakciju
     try {
-        DB::statement('ROLLBACK;');
+        // Briše sve tabele - ako migrate:fresh ne može zbog transakcije
+        DB::statement('DROP SCHEMA public CASCADE;');
+        DB::statement('CREATE SCHEMA public;');
     } catch (\Exception $e) {}
 
     try {
@@ -24,6 +24,7 @@ Route::get('/run-fresh-migrations', function () {
         return "Greška pri izvršavanju migracija: " . $e->getMessage();
     }
 });
+
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
 Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'contact'])->name('contact_page');
