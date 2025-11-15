@@ -7,15 +7,18 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 Route::get('/run-fresh-migrations', function () {
+
+    // Očisti potencijalnu prethodnu abort transakciju
     try {
-        // Briše sve tabele i ponovo kreira migracije
+        DB::statement('ROLLBACK;');
+    } catch (\Exception $e) {}
+
+    try {
         Artisan::call('migrate:fresh', ['--force' => true]);
-
-        // Pokreće seed-ove
         Artisan::call('db:seed', ['--force' => true]);
-
         return "Migracije i seed-ovi su uspešno izvršeni!";
     } catch (\Exception $e) {
         return "Greška pri izvršavanju migracija: " . $e->getMessage();
