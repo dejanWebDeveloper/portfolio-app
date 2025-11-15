@@ -9,14 +9,22 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 Route::get('/run-fresh-migrations', function () {
     try {
-        // Briše sve tabele - ako migrate:fresh ne može zbog transakcije
+        // Očisti celu bazu
         DB::statement('DROP SCHEMA public CASCADE;');
         DB::statement('CREATE SCHEMA public;');
-    } catch (\Exception $e) {}
+    } catch (\Exception $e) {
+        // Ignoriši grešku ako schema ne postoji
+    }
 
     try {
+        // Pokreni sve migracije i seed-ove
         Artisan::call('migrate:fresh', ['--force' => true]);
         Artisan::call('db:seed', ['--force' => true]);
         return "Migracije i seed-ovi su uspešno izvršeni!";

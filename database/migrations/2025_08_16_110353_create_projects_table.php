@@ -1,19 +1,18 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+    // Važno: isključujemo transakcije da PostgreSQL ne abortuje batch
+    public $withinTransaction = false;
+
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('heading', 255);
-            $table->string('slug')->unique();
+            $table->string('slug')->unique(); // UNIQUE constraint odmah ovde
             $table->string('preheading', 500);
             $table->text('text');
             $table->string('photo')->nullable();
@@ -29,9 +28,6 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('projects');
