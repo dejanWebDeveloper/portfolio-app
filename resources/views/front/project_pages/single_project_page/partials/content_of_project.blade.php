@@ -1,7 +1,9 @@
 <!-- Screenshotovi -->
 <div class="grid md:grid-cols-2 gap-6 mb-12">
     <img src="{{$singleProject->imageUrl()}}" alt="Login Screen" class="rounded-xl shadow-lg">
-    <img src="{{$singleProject->additionalImageUrl()}}" alt="Dashboard" class="rounded-xl shadow-lg">
+    <img src="{{ asset('photo/dejan_jovanovic.jpg') }}" alt="Your name"
+        class="rounded-xl object-cover border-4 border-indigo-600 shadow-lg hover:scale-105 transition-transform duration-300"/>
+
 </div>
 <!-- Detaljan opis -->
 <section class="mb-12">
