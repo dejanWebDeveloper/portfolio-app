@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-
 Route::get('/run-fresh-migrations', function () {
     try {
         // Očisti celu bazu
@@ -32,7 +28,6 @@ Route::get('/run-fresh-migrations', function () {
         return "Greška pri izvršavanju migracija: " . $e->getMessage();
     }
 });
-
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
 Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'contact'])->name('contact_page');
