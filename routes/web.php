@@ -10,24 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/run-fresh-migrations', function () {
-    try {
-        // Očisti celu bazu
-        DB::statement('DROP SCHEMA public CASCADE;');
-        DB::statement('CREATE SCHEMA public;');
-    } catch (\Exception $e) {
-        // Ignoriši grešku ako schema ne postoji
-    }
-
-    try {
-        // Pokreni sve migracije i seed-ove
-        Artisan::call('migrate:fresh', ['--force' => true]);
-        Artisan::call('db:seed', ['--force' => true]);
-        return "Migracije i seed-ovi su uspešno izvršeni!";
-    } catch (\Exception $e) {
-        return "Greška pri izvršavanju migracija: " . $e->getMessage();
-    }
-});
 Route::get('/', [\App\Http\Controllers\Front\IndexController::class, 'index'])->name('index_page');
 Route::get('/links-page', [\App\Http\Controllers\Front\IndexController::class, 'getLinksPage'])->name('links_page');
 Route::get('/contact', [\App\Http\Controllers\Front\ContactController::class, 'contact'])->name('contact_page');
